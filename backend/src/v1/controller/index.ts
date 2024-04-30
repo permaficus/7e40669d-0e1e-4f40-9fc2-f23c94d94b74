@@ -1,5 +1,5 @@
 import { Model } from "../../model";
-import { Request, Response, NextFunction, response } from 'express'
+import { Request, Response, NextFunction } from 'express'
 
 export const storeContact = async (req: Request, res: Response, next: NextFunction) => {
     try {
