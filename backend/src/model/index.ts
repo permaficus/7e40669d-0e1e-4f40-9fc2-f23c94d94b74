@@ -21,7 +21,16 @@ export class Model {
                         ...items.firstName && { firstName: items.firstName },
                         ...items.lastName && { lastName: items.lastName },
                         ...items.position && { position: items.position },
-                        ...items.email && { email: items.email }
+                        ...items.email && { email: items.email },
+                        ...items.phone && { phone: items.phone }
+                    },
+                    select: {
+                        id: true,
+                        ...items.firstName && { firstName: true },
+                        ...items.lastName && { lastName: true },
+                        ...items.position && { position: true },
+                        ...items.email && { email: true },
+                        ...items.phone && { phone: true }
                     }
                 });
             }));
