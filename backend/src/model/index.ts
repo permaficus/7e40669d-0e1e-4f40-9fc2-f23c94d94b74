@@ -1,4 +1,3 @@
-import { transform } from "typescript";
 import { DB } from "../libs/prisma.utils";
 
 export class Model {
