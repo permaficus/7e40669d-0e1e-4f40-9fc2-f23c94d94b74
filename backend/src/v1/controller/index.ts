@@ -1,14 +1,15 @@
 import { Model } from "../../model";
-import { Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction, response } from 'express'
 
 export const storeContact = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const response = await Model.create(req.body);
+        const { payload } = req.body;
+        const response = await Model.create(payload);
         res.status(200).json({
             status: 'OK',
             code: '200',
             message: {
-                storing: `${response.count} contacts`
+                storing: `${response.count} ${response.count > 1 ? 'contacts' : 'contact'}`
             }
         })
     } catch (error: any) {
@@ -18,11 +19,12 @@ export const storeContact = async (req: Request, res: Response, next: NextFuncti
 }
 export const updateContact = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await Model.update(req.body);
+        const { payload } = req.body
+        const response = await Model.update(payload);
         res.status(200).json({
             status: 'OK',
             code: 200,
-            details: `updating ${req.body.length} contacts`
+            details: response
         })
     } catch (error: any) {
         res.status(500);
