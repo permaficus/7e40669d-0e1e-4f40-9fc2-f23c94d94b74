@@ -1,7 +1,14 @@
 import { DB } from "../libs/prisma.utils";
+interface DataSet {
+    firstName: string
+    lastName: string
+    phone: string
+    email: string
+    position: string
+}
 
 export class Model {
-    static create = async (payload: any) => {
+    static create = async (payload: DataSet) => {
         try {
             return await DB.contact.createMany({
                 data: payload
@@ -13,17 +20,12 @@ export class Model {
     static update = async (payload: any) => {
         try {
             const result = await Promise.all(payload.map(async (items: any) => {
+                const { id, ...newItems} = items
                 return await DB.contact.update({
                     where: {
                         id: items.id
                     },
-                    data: {
-                        ...items.firstName && { firstName: items.firstName },
-                        ...items.lastName && { lastName: items.lastName },
-                        ...items.position && { position: items.position },
-                        ...items.email && { email: items.email },
-                        ...items.phone && { phone: items.phone }
-                    },
+                    data: {...newItems},
                     select: {
                         id: true,
                         ...items.firstName && { firstName: true },
