@@ -12,7 +12,31 @@ SERVICE_LOCAL_PORT=4080
 NODE_ENV="DEVELOPMENT"
 ```
 
-## Populate Contacts Info
+## How To Start
+
+<details>
+<summary>Database Init</summary>
+
+```bash
+npx prisma db push
+```
+
+</details>
+
+<details>
+<summary>Start App</summary>
+
+```bash
+npm run dev
+```
+OR
+```bash
+npm start
+```
+
+</details>
+
+## Retrieve Contacts Info
 <details>
 <summary>GET: /api/v1/contacts (Response Body)</summary>
 
