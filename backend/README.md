@@ -1,5 +1,17 @@
 # Ambisius - Backend Documentation
 
+## Environment Sample (.env)
+
+```shell
+# USING AT DOCKER CONTAINER
+# DATABASE_URL="mongodb://username:password@host.docker.internal:27017/ambisius?retryWrites=true&authSource=admin&directConnection=true"
+# USING AT LOCALHOST
+DATABASE_URL="mongodb://username:password@localhost:27017/ambisius?retryWrites=true&authSource=admin&directConnection=true"
+
+SERVICE_LOCAL_PORT=4080
+NODE_ENV="DEVELOPMENT"
+```
+
 ## Populate Contacts Info
 <details>
 <summary>GET: /api/v1/contacts (Response Body)</summary>
