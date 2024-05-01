@@ -6,7 +6,6 @@ interface DataSet {
     email: string
     position: string
 }
-
 export class Model {
     static create = async (payload: DataSet) => {
         try {
@@ -37,6 +36,14 @@ export class Model {
                 });
             }));
             return result
+        } catch (error: any) {
+            throw new Error(error)
+        }
+    }
+
+    static read = async (): Promise<any> => {
+        try {
+            return await DB.contact.findMany()
         } catch (error: any) {
             throw new Error(error)
         }

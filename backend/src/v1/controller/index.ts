@@ -31,3 +31,17 @@ export const updateContact = async (req: Request, res: Response, next: NextFunct
         next(error)
     }
 }
+
+export const populateContacts = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const response = await Model.read();
+        res.status(200).json({
+            status: 'OK',
+            code: 200,
+            data: response
+        })
+    } catch (error: any) {
+        res.status(500);
+        next(error)
+    }
+}
