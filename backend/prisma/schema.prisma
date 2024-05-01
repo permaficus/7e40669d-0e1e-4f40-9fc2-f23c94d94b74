@@ -20,5 +20,5 @@ model contact {
   lastName    String
   position    String
   phone       String
-  email       String
+  email       String @unique
 }
