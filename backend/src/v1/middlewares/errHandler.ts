@@ -17,7 +17,8 @@ export const PathNotFound = async (req: Request, res: Response, next: NextFuncti
 export const errHandler = async (err: any, req: Request, res: Response, next: NextFunction ) => {
     const statusCode = res.statusCode !== 200 ? res.statusCode : 500
     res.status(statusCode).json({
-        status: statusCode,
+        status: statusCode == 400 ? 'ERR_BAD_REQUEST' : 'ERR_BAD_SERVICE',
+        code: statusCode,
         details: err.message
     }).end();
 }
