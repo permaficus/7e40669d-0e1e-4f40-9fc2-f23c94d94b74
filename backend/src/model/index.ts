@@ -6,6 +6,13 @@ interface DataSet {
     email: string
     position: string
 }
+const display = ({ schema }: any) => {
+    let newSchema: any = {};
+    for (let props in schema) {
+        newSchema[props] = true
+    }
+    return newSchema
+}
 export class Model {
     static create = async (payload: DataSet) => {
         try {
@@ -25,14 +32,7 @@ export class Model {
                         id: items.id
                     },
                     data: {...newItems},
-                    select: {
-                        id: true,
-                        ...items.firstName && { firstName: true },
-                        ...items.lastName && { lastName: true },
-                        ...items.position && { position: true },
-                        ...items.email && { email: true },
-                        ...items.phone && { phone: true }
-                    }
+                    select: display({ schema: items })
                 });
             }));
             return result
