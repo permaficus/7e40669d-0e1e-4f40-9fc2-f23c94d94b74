@@ -48,4 +48,16 @@ export class Model {
             throw new Error(error)
         }
     }
+
+    static remove = async (id: string[]) => {
+        try {
+            return await DB.contact.deleteMany({
+                where: {
+                    id: { in: id }
+                }
+            })
+        } catch (error: any) {
+            throw new Error(error)
+        }
+    }
 }

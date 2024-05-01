@@ -45,3 +45,20 @@ export const populateContacts = async (req: Request, res: Response, next: NextFu
         next(error)
     }
 }
+
+export const removeContact = async (req: Request, res: Response, next: NextFunction) => {
+    const { ids } = req.body
+    try {
+        const response = await Model.remove(ids);
+        res.status(200).json({
+            status: 'OK',
+            code: 200,
+            message: {
+                removing: `${response.count} ${response.count > 1 ? 'contacts' : 'contact'}`
+            }
+        })
+    } catch (error: any) {
+        res.status(500);
+        next(error)
+    }
+}
