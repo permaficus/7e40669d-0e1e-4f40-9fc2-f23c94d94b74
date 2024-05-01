@@ -1,8 +1,7 @@
-## Ambisius - Backend
+## Ambisius - Backend Documentation
 
 #### Storing Contact Info
-<details>
-<summary>POST: /api/v1/store</summary>
+>POST: /api/v1/store
 
 ```json
 {
@@ -28,8 +27,7 @@
 </details>
 
 #### Updating Contact Info
-<details>
-<summary>PATCH: /api/v1/update</summary>
+>PATCH: /api/v1/update
 
 ```json
 {
