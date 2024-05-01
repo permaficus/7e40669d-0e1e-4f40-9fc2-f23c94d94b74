@@ -1,6 +1,6 @@
-## Ambisius - Backend Documentation
+# Ambisius - Backend Documentation
 
-#### Populate Contacts Info
+## Populate Contacts Info
 <details>
 <summary>GET: /api/v1/contacts (Response Body)</summary>
 
@@ -54,8 +54,11 @@
 ```
 </details>
 
-#### Storing Contact Info
+## Storing Contact Info
 >POST: /api/v1/store
+
+<details>
+<summary>Request Body</summary>
 
 ```json
 {
@@ -78,8 +81,27 @@
 }
 ```
 
-#### Updating Contact Info
+</details>
+<details>
+<summary>Response</summary>
+
+```json
+{
+    "status": "OK",
+    "code": "200",
+    "message": {
+        "storing": "2 contacts"
+    }
+}
+```
+
+</details>
+
+## Updating Contact Info
 >PATCH: /api/v1/update
+
+<details>
+<summary>Request Body</summary>
 
 ```json
 {
@@ -91,9 +113,66 @@
         },
         {
             "id": "6630edb3d2691e7e49fbe1ed",
-            "lastName": "{{$randomLastName}}",
-            "email": "{{$randomEmail}}"
+            "email": "{{$randomEmail}}",
+            "position": "{{$randomJobTitle}}"
         }
     ]
 }
 ```
+
+</details>
+<details>
+<summary>Response</summary>
+
+```json
+{
+    "status": "OK",
+    "code": 200,
+    "details": [
+        {
+            "id": "6630eda8d2691e7e49fbe1ec",
+            "firstName": "Esther",
+            "phone": "883-853-8432"
+        },
+        {
+            "id": "6630edb3d2691e7e49fbe1ed",
+            "email": "Amalia.Denesik21@yahoo.com",
+            "position": "Product Paradigm Orchestrator"
+        }
+    ]
+}
+```
+
+</details>
+
+## Removing Contact
+>DELETE: /api/v1/contacts
+
+<details>
+<summary>Request Body</summary>
+
+```json
+{
+    "ids": [
+        "6631e6fb6aa21d0ff0aea31b", 
+        "6631e6fb6aa21d0ff0aea31a", 
+        "6631e6c16aa21d0ff0aea319"
+    ]
+}
+```
+
+</details>
+<details>
+<summary>Response</summary>
+
+```json
+{
+    "status": "OK",
+    "code": 200,
+    "message": {
+        "removing": "3 contacts"
+    }
+}
+```
+
+</details>
