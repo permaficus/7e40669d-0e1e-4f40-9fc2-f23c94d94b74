@@ -162,6 +162,58 @@ router.post('/store', validateRequest('storing'), storeContact);
  */
 router.patch('/update', validateRequest('update'), updateContact);
 router.get('/contacts', populateContacts)
+/**
+ * @swagger
+ * definitions:
+ *  DeletePayload:
+ *    type: object
+ *    properties:
+ *      ids:
+ *        type: array
+ *        items:
+ *          type: string
+ *        example:
+ *          - 66324f0b5b4d031251066730
+ */
+/**
+ * @swagger
+ * definitions:
+ *  DeleteResponse:
+ *    type: object
+ *    properties:
+ *      status:
+ *         type: string
+ *         example: OK
+ *      code:
+ *         type: integer
+ *         example: 200
+ *      message:
+ *         type: object
+ *         properties:
+ *             removing:
+ *               type: string
+ *               example: 1 contact
+ */
+/**
+ * @swagger
+ * '/api/v1/contacts':
+ *   delete:
+ *     tags: [Delete]
+ *     summary: Removing list of contacts
+ *     requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *             schema:
+ *               $ref: '#/definitions/DeletePayload'
+ *     responses:
+ *       '200':
+ *          description: Success Response
+ *          content:
+ *            application/json:
+ *               schema:
+ *                 $ref: '#/definitions/DeleteResponse'
+ */
 router.delete('/contacts', removeContact)
 router.use(PathNotFound)
 router.use(errHandler)

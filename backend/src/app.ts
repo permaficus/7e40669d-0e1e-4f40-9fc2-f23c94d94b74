@@ -16,6 +16,8 @@ import chalk from 'chalk'
               `${NODE_ENV}`
             )}\nURL: ${chalk.blueBright(
               `http://localhost:${SERVICE_LOCAL_PORT}`
+            )}\nDocs: ${chalk.blueBright(
+                `http://localhost:${SERVICE_LOCAL_PORT}/api-docs/`
             )}\nTime: ${chalk.blueBright(
                 `${new Date(Date.now())}`
             )}\n\n-----------------------------------------`
