@@ -40,6 +40,11 @@
                 "schema": {
                   "$ref": "#/definitions/Payload"
                 }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/definitions/Payload"
+                }
               }
             },
             "required": true
@@ -51,11 +56,6 @@
                 "application/json": {
                   "schema": {
                     "$ref": "#/definitions/StoreResponse"
-                  }
-                },
-                "application/xml": {
-                  "schema": {
-                    "$ref": "#/components/StoreResponse"
                   }
                 }
               }
