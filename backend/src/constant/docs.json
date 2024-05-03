@@ -55,12 +55,12 @@
               "content": {
                 "application/json": {
                   "schema": {
-                    "$ref": "#/definitions/StoringResponse"
+                    "$ref": "#/definitions/StoreResponse"
                   }
                 },
                 "application/xml": {
                   "schema": {
-                    "$ref": "#/components/StoringResponse"
+                    "$ref": "#/components/StoreResponse"
                   }
                 }
               }
@@ -216,8 +216,10 @@
                 "message": {
                     "type": "object",
                     "properties": {
-                        "storing": "string",
-                        "example": "1 contact"
+                        "storing": {
+                            "type": "string",
+                            "example": "1 contact"
+                        }
                     }
                 }
             }
