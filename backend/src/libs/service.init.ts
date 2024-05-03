@@ -6,29 +6,11 @@ import {
     allowedOrigin
 } from "../constant/config"
 import swaggerUi from 'swagger-ui-express';
-import swaggerDocs from 'swagger-jsdoc';
 import { router as v1 } from "../v1/routes"
 import { badRequest } from '../v1/middlewares/errHandler'
+import apiDocs from '../constant/docs.json'; 
 
 const httpServer: Express = express()
-const options = {
-    definition: {
-      openapi: "3.1.0",
-      info: {
-        title: "Ambisius API Docs",
-        version: "1.0.0",
-        description:
-          "Ambisius API Docs",
-      },
-      servers: [
-        {
-          url: "http://localhost:4080",
-        },
-      ],
-    },
-    apis: ["./src/v1/routes/index.ts"],
-  };
-const specs = swaggerDocs(options)
 const httpServerInit = async () => {
     httpServer.use(express.urlencoded({ extended: true }))
     httpServer.use(express.json())
@@ -43,7 +25,7 @@ const httpServerInit = async () => {
             return callback(null, true)
         }} : {}
     }))
-    httpServer.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs))
+    httpServer.use('/api-docs', swaggerUi.serve, swaggerUi.setup(apiDocs))
     httpServer.use('/api/v1', v1);
     httpServer.use(badRequest)
 }
