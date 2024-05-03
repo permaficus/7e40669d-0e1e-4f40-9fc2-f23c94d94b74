@@ -1,0 +1,310 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+      "title": "Ambisius RESTFul API",
+      "description": "API Documentation for Ambisius Coding Challenge",
+      "contact": {
+        "email": "abukhalif2019@gmail.com"
+      },
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:4080"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Store",
+        "description": "Storing Contact Information"
+      },
+      {
+        "name": "Update",
+        "description": "Update list of contacts"
+      },
+      {
+        "name": "Delete",
+        "description": "Removing list of contacts"
+      }
+    ],
+    "paths": {
+      "/api/v1/store": {
+        "post": {
+          "tags": [
+            "Store"
+          ],
+          "summary": "Add New Contact",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Payload"
+                }
+              },
+              "application/x-www-form-urlencoded": {
+                "schema": {
+                  "$ref": "#/definitions/Payload"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Success Response",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/definitions/StoringResponse"
+                  }
+                },
+                "application/xml": {
+                  "schema": {
+                    "$ref": "#/components/StoringResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request"
+            },
+            "500": {
+                "description": "Error Bad Service"
+            }
+          }
+        }
+      },
+      "/api/v1/update": {
+        "patch": {
+            "tags": [
+                "Update"
+            ],
+            "summary": "Update list of contacts",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/definitions/UpdatePayload"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Success Response",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/UpdateResponse"
+                            }
+                        }
+                    }
+                },
+                "400": {
+                    "description": "Error Bad Request"
+                },
+                "500": {
+                    "description": "Error Bad Service"
+                }
+            }
+        }
+      },
+      "/api/v1/contacts": {
+        "delete": {
+            "tags": ["Delete"],
+            "summary": "Remove 1 or more contacts",
+            "requestBody": {
+                "required": true,
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/definitions/DeletePayload"
+                        }
+                    }
+                }
+            },
+            "responses": {
+                "200": {
+                    "description": "Success Response",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/definitions/DeleteResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      }
+    },
+    "definitions": {
+        "GetResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "OK"
+                },
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PayloadItems"
+                    }
+                }
+            }
+        },
+        "PayloadItems": {
+            "type": "object",
+            "properties": {
+                "firstName": {
+                    "type": "string",
+                    "example": "John"
+                },
+                "lastName": {
+                    "type": "string",
+                    "example": "Smith"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "johnsmith@gmail.com"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "813-3939-939"
+                },
+                "position": {
+                    "type": "string",
+                    "example": "CTO"
+                }
+            },
+            "required": [
+                "firstName",
+                "lastName",
+                "email",
+                "phone",
+                "position"
+            ]
+        },
+        "Payload": {
+            "type": "object",
+            "properties": {
+                "payload": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PayloadItems"
+                    }
+                }
+            }
+        },
+        "StoreResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "OK"
+                },
+                "code": {
+                    "type": "integer",
+                    "example": 200
+                },
+                "message": {
+                    "type": "object",
+                    "properties": {
+                        "storing": "string",
+                        "example": "1 contact"
+                    }
+                }
+            }
+        },
+        "UpdateItems": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "example": "66324f0b5b4d031251066730"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "johnsmith@example.id"
+                },
+                "phone": {
+                    "type": "string",
+                    "example": "813-3434-939"
+                },
+                "position": {
+                    "type": "string",
+                    "example": "CFO"
+                }
+            }
+        },
+        "UpdatePayload": {
+            "type": "object",
+            "properties": {
+                "payload": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/UpdateItems"
+                    }
+                }
+            }
+        },
+        "UpdateResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "OK"
+                },
+                "code": {
+                    "type": "string",
+                    "example": 200
+                },
+                "details": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/UpdateItems"
+                    }
+                }
+            }
+        },
+        "DeletePayload": {
+            "type": "object",
+            "properties": {
+                "ids": {
+                    "type": "array",
+                    "example": [
+                        "66324f0b5b4d031251066730"
+                    ]
+                }
+            }
+        },
+        "DeleteResponse": {
+            "type": "object",
+            "properties": {
+                "status": {
+                    "type": "string",
+                    "example": "OK"
+                },
+                "code": {
+                    "type": "string",
+                    "example": 200
+                },
+                "message": {
+                    "type": "object",
+                    "properties": {
+                        "removing": {
+                            "type": "string",
+                            "example": "1 contact"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
