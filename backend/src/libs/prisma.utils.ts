@@ -6,9 +6,9 @@ export type BatchPayload = Prisma.BatchPayload
 class PrismaError extends Error {
     statusCode: number
 
-    constructor(message: any, statusCode: number) {
+    constructor(message: string, statusCode: number) {
         super(message)
-        this.message = message || undefined
+        this.message = message
         this.statusCode = statusCode
         this.name = this.constructor.name
 
@@ -17,7 +17,7 @@ class PrismaError extends Error {
 }
 export const prismaErrHandler = (error: any) => {
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
-        const { meta } = error;
+        const { meta }: any = error;
         throw new PrismaError(meta?.cause, 400)
     }
 
