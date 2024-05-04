@@ -4,7 +4,7 @@ import { Request, Response, NextFunction } from 'express'
 export const storeContact = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const { payload } = req.body;
-        const response = await Model.create(payload);
+        const response: any = await Model.create(payload);
         res.status(200).json({
             status: 'OK',
             code: '200',
@@ -13,7 +13,7 @@ export const storeContact = async (req: Request, res: Response, next: NextFuncti
             }
         })
     } catch (error: any) {
-        res.status(500);
+        res.status(error.statusCode);
         next(error)
     }
 }
@@ -27,7 +27,7 @@ export const updateContact = async (req: Request, res: Response, next: NextFunct
             details: response
         })
     } catch (error: any) {
-        res.status(500);
+        res.status(error.statusCode)
         next(error)
     }
 }
@@ -41,7 +41,7 @@ export const populateContacts = async (req: Request, res: Response, next: NextFu
             data: response
         })
     } catch (error: any) {
-        res.status(500);
+        res.status(error.statusCode);
         next(error)
     }
 }
@@ -49,7 +49,7 @@ export const populateContacts = async (req: Request, res: Response, next: NextFu
 export const removeContact = async (req: Request, res: Response, next: NextFunction) => {
     const { ids } = req.body
     try {
-        const response = await Model.remove(ids);
+        const response: any = await Model.remove(ids);
         res.status(200).json({
             status: 'OK',
             code: 200,
@@ -58,7 +58,7 @@ export const removeContact = async (req: Request, res: Response, next: NextFunct
             }
         })
     } catch (error: any) {
-        res.status(500);
+        res.status(error.statusCode)
         next(error)
     }
 }

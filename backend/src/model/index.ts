@@ -1,4 +1,5 @@
-import { DB } from "../libs/prisma.utils";
+import { DB, prismaErrHandler, BatchPayload } from "../libs/prisma.utils";
+
 interface DataSet {
     firstName: string
     lastName: string
@@ -13,14 +14,15 @@ const display = ({ schema }: any) => {
     }
     return newSchema
 }
+
 export class Model {
-    static create = async (payload: DataSet) => {
+    static create = async (payload: DataSet): Promise<BatchPayload | undefined> => {
         try {
             return await DB.contact.createMany({
                 data: payload
             })
         } catch (error: any) {
-            throw new Error(error)
+            prismaErrHandler(error)
         }
     }
     static update = async (payload: any) => {
@@ -37,7 +39,7 @@ export class Model {
             }));
             return result
         } catch (error: any) {
-            throw new Error(error)
+            prismaErrHandler(error)
         }
     }
 
@@ -45,7 +47,7 @@ export class Model {
         try {
             return await DB.contact.findMany()
         } catch (error: any) {
-            throw new Error(error)
+            prismaErrHandler(error)
         }
     }
 
@@ -57,7 +59,7 @@ export class Model {
                 }
             })
         } catch (error: any) {
-            throw new Error(error)
+            prismaErrHandler(error)
         }
     }
 }
