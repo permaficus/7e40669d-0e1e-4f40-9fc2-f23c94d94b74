@@ -238,7 +238,10 @@
                     "type": "string",
                     "example": "CFO"
                 }
-            }
+            },
+            "required": [
+                "id"
+            ]
         },
         "UpdatePayload": {
             "type": "object",
